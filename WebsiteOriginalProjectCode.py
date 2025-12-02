@@ -150,11 +150,11 @@ def register():
 def login():
     if request.method == 'POST':
         username = request.form.get('username', '').strip()
-        password = request.form.get('password', ' ').strip() ## Added to make it secure
+        password = request.form.get('password', ' ').strip() ## Username is checked with password
         users = load_users()
         
         # FLAW 2: Only checks if username exists, ignores password
-        if username in users and users[username] == password: ## Added to make it secure
+        if username in users and users[username] == password: ## Username is checked with password
             session['username'] = username
             return redirect(url_for('dashboard'))
         else:
