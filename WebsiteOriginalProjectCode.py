@@ -274,6 +274,19 @@ def register():
                 title='Register', active_page='register', show_email=True, show_phone=True,
                 message='All fields are required.', msg_class='error', button_text='Create Account')
         
+        ## Check email, phone is formatted correctly
+        email_pattern = re.match("^\w+@\w+\.\w+$", email)
+        if(email_pattern == None): 
+            return render_template_string(PROFESSIONAL_TEMPLATE, 
+                title='Register', active_page='register', show_email=True, show_phone=True,
+                message='Invalid email address entered.', msg_class='error', button_text='Create Account')
+
+        phone_pattern = re.match("^\d{3}-? ?\d{3}-? ?\d{4}$", phone)
+        if(phone_pattern == None):
+            return render_template_string(PROFESSIONAL_TEMPLATE, 
+                title='Register', active_page='register', show_email=True, show_phone=True,
+                message='Invalid phone number entered.', msg_class='error', button_text='Create Account')
+        
         users = load_users()
         if username in users:
             return render_template_string(PROFESSIONAL_TEMPLATE, 
