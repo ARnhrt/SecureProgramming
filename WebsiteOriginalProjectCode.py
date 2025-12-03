@@ -137,8 +137,8 @@ def register():
                                        message='Please fill in all fields.', msg_class='error')
         
         # FLAW 1: Always allows registration (no duplicate check)
-        users = load_users()
-        if username in users:  
+        users = load_users() 
+        if username in users:  # If username is in user.txt it will tell the user to choose another username.
             return render_template_string(
                 SIMPLE_TEMPLATE, title='Register', active_page='register',
                 message='Username already exists. Please choose another.', msg_class='error',
