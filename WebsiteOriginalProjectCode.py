@@ -274,6 +274,29 @@ def register():
                 title='Register', active_page='register', show_email=True, show_phone=True,
                 message='All fields are required.', msg_class='error', button_text='Create Account')
         
+        ## Valid password
+        passwd_len = re.match("^.{8,}$", password)
+        passwd_chr = re.match("^.*[A-Z].*$", password)
+        passwd_low = re.match("^.*[A-Z].*$", password)
+        passwd_num = re.match("^.*\d.*$", password)
+
+        if(passwd_len == None): 
+            return render_template_string(PROFESSIONAL_TEMPLATE, 
+                title='Register', active_page='register', show_email=True, show_phone=True,
+                message='Invalid password: under 8 characters', msg_class='error', button_text='Create Account')
+        if(passwd_chr == None): 
+            return render_template_string(PROFESSIONAL_TEMPLATE, 
+                title='Register', active_page='register', show_email=True, show_phone=True,
+                message='Invalid password: does not contain capital letter', msg_class='error', button_text='Create Account')
+        if(passwd_low == None): 
+            return render_template_string(PROFESSIONAL_TEMPLATE, 
+                title='Register', active_page='register', show_email=True, show_phone=True,
+                message='Invalid password: does not include lowercase letter', msg_class='error', button_text='Create Account')
+        if(passwd_num == None): 
+            return render_template_string(PROFESSIONAL_TEMPLATE, 
+                title='Register', active_page='register', show_email=True, show_phone=True,
+                message='Invalid password: does not include number', msg_class='error', button_text='Create Account')
+        
         ## Check email, phone is formatted correctly
         email_pattern = re.match("^\w+@\w+\.\w+$", email)
         if(email_pattern == None): 
