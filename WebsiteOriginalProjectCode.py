@@ -138,6 +138,12 @@ def register():
         
         # FLAW 1: Always allows registration (no duplicate check)
         users = load_users()
+        if username in users:  
+            return render_template_string(
+                SIMPLE_TEMPLATE, title='Register', active_page='register',
+                message='Username already exists. Please choose another.', msg_class='error',
+                username=username, button_text='Register'
+            )
         users[username] = password  # Overwrites existing user!
         save_users(users)
         
